@@ -2,6 +2,8 @@
 
 Simple script to exploit buffer overdlows
 
+<img src="https://raw.githubusercontent.com/sudoaza/bof/main/images/bof.svg" alt="bof Buffer Overflow exploitation script usage" width="960" />
+
 ## Usage
 
 usage: bof.py [-h] -H HOST -p PORT -o OFFSET [-e EIP] [-b BIN] [-s SIZE] [-sf SUFFIX] [-pf PREFIX] [-a ARCH] [-O OS]
