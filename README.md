@@ -1,6 +1,6 @@
 # bof
 
-Simple script to exploit buffer overdlows
+Simple tool to detect and exploit buffer overflows.
 
 <img src="https://raw.githubusercontent.com/sudoaza/bof/main/images/bof.svg" alt="bof Buffer Overflow exploitation script usage" width="960" />
 
