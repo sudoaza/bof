@@ -23,6 +23,7 @@ Options:
 - -a ARCH, --arch ARCH  Target architecture. Ie. x86 or amd64
 - -O OS, --os OS        Target OS. Ie. windows or linux
 - -v, --debug           Show debug information
+- -d, --dry             Print would be payload
 
 
 Create custom shellcode and save to shellcode.py
