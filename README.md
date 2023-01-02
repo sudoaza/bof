@@ -10,23 +10,23 @@ usage: bof.py [-h] [-H HOST] [-p PORT] -o OFFSET [-e EIP] [-b BIN] [-s SIZE] [-s
 
 Exploit buffer overflows.
 
-options:
-  -h, --help            show this help message and exit
-  -H HOST, --host HOST  Target host
-  -p PORT, --port PORT  Target port
-  -o OFFSET, --offset OFFSET
-                        EIP offset
-  -e EIP, --eip EIP     Value to overwrite EIP with or ROP chain. Ie. 0x01010101,0x02020202,0x03030303
-  -b BIN, --bin BIN     Target binary to extract gadgets from. Only ELF!!
-  -s SIZE, --size SIZE  Payload size
-  -sf SUFFIX, --suffix SUFFIX
-                        Payload suffix, Ie. \n
-  -pf PREFIX, --prefix PREFIX
-                        Payload prefix, Ie. USER
-  -a ARCH, --arch ARCH  Target architecture. x86 / amd64
-  -O OS, --os OS        Target OS. windows / linux
-  -d, --dry             Dry run. Print would be paylad.
-  -v, --debug           Show debug information
+    options:
+      -h, --help            show this help message and exit
+      -H HOST, --host HOST  Target host
+      -p PORT, --port PORT  Target port
+      -o OFFSET, --offset OFFSET
+                            EIP offset
+      -e EIP, --eip EIP     Value to overwrite EIP with or ROP chain. Ie. 0x01010101,0x02020202,0x03030303
+      -b BIN, --bin BIN     Target binary to extract gadgets from. Only ELF!!
+      -s SIZE, --size SIZE  Payload size
+      -sf SUFFIX, --suffix SUFFIX
+                            Payload suffix, Ie. \n
+      -pf PREFIX, --prefix PREFIX
+                            Payload prefix, Ie. USER
+      -a ARCH, --arch ARCH  Target architecture. x86 / amd64
+      -O OS, --os OS        Target OS. windows / linux
+      -d, --dry             Dry run. Print would be paylad.
+      -v, --debug           Show debug information
 
 Create custom shellcode and save to shellcode.py
 (must be formatted buf = b'\x90\x90\x90\x90...')
